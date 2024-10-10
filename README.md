@@ -20,7 +20,8 @@ The dataset used is publicly available on Kaggle:
 - **Exercise**: Exercise habits (string)
 - **Diagnosis**: Diabetes diagnosis (target variable - string)
 
-## Data Preprocessing
+
+### Data Preprocessing
 ### Handling Categorical Variables
 All categorical variables are transformed into numeric values using **Label Encoding** through PySpark's `StringIndexer`. The transformation details are as follows:
 
@@ -29,10 +30,10 @@ All categorical variables are transformed into numeric values using **Label Enco
 - **Exercise**: Transformed to `Exercise_index` with values [No, Regular].
 
 ### Correlation Analysis
-During data exploration, it was found that certain variables had high correlations. Specifically:
-- **BMI** showed strong correlation with **FBS** and **HbA1c**.
-- **FBS** and **HbA1c** had a perfect correlation of 1.0, so **FBS** was dropped from the feature set.
-- **Smoking**, **Diet**, and **Exercise** were also perfectly correlated and adjusted in the model accordingly.
+During data exploration, certain variables were found to have perfect correlations with others. Dependent features with a perfect correlation (1) with other features were dropped. In this case, the following variables were dropped:
+- **FBS** (due to perfect correlation with HbA1c),
+- **Smoking_index** (due to perfect correlation with Exercise_index),
+- **Diet_index** (due to perfect correlation with Smoking_index).
 
 ### Final Features
 The following features were selected for the model:
